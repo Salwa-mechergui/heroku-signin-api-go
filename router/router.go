@@ -11,6 +11,6 @@ func SetupRouter() *mux.Router {
 
 	router := mux.NewRouter()
 	// routes
-	router.HandleFunc("/login", controller.CreateEndpoint).Methods("POST")
+	router.HandleFunc("/login", controller.CreateEndpoint).Methods("GET")
 	return router
 }
