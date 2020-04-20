@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	router "signin/recurrent_rides_api/router"
 
+	"github.com/gorilla/handlers"
 	"github.com/subosito/gotenv"
 )
 
@@ -16,18 +16,15 @@ func Init() {
 }
 
 func main() {
-	log.Println(os.Getenv("APP_ID"))
-	log.Println(os.Getenv("APP_SECRET"))
 	Init()
 	fmt.Println("Starting the application...")
 	// Init router
 	r := router.SetupRouter()
-	// Listen and Serve in 0.0.0.0:8080
+	// Listen and Serve in 0.0.0.0:8000
 	port := os.Getenv("PORT")
 	if port == "" {
-
-		port = "8080"
+		port = "8000"
 	}
-	log.Fatal(http.ListenAndServe(":"+port, r))
-	fmt.Println("Terminating the application...")
+	err := http.ListenAndServe(":"+port, handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"https://signfront.herokuapp.com", "http://localhost:3000"}))(r))
+	fmt.Println(err)
 }
