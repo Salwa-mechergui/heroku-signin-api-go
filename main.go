@@ -20,11 +20,11 @@ func main() {
 	fmt.Println("Starting the application...")
 	// Init router
 	r := router.SetupRouter()
-	// Listen and Serve in 0.0.0.0:8000
+	// Listen and Serve in 0.0.0.0:8080
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
 	}
-	err := http.ListenAndServe(":"+port, handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"https://signfront.herokuapp.com", "http://localhost:3000"}))(r))
+	err := http.ListenAndServe(":"+port, handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"https://craftfoundry-signin-front.herokuapp.com/", "http://localhost:3000"}))(r))
 	fmt.Println(err)
 }
