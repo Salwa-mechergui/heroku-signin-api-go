@@ -20,7 +20,7 @@ func main() {
 	fmt.Println("Starting the application...")
 	// Init router
 	r := router.SetupRouter()
-	// Listen and Serve in 0.0.0.0:8080
+	// Listen and Serve in 0.0.0.0:8000
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
